@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UNDSCVRD - Block Party</title>
+    <title>9Pu-ne Official Website </title>
+    <link rel="icon" href="https://raw.githubusercontent.com/9Pu-nex/Jomjai/main/JOMJAI.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+
     <style>
         * {
             margin: 0;
@@ -12,7 +16,7 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: "Bai Jamjuree", sans-serif;
             background: #000;
             color: #fff;
             overflow-x: hidden;
@@ -218,6 +222,14 @@
             transform: translateX(-50%);
             z-index: 10;
             animation: bounce 2s infinite;
+            text-align: center; /* เพิ่มเข้ามา */
+            transition: opacity 0.5s; /* เพิ่มเข้ามา */
+        }
+        
+        /* เพิ่มเข้ามา: Class สำหรับซ่อน Scroll Indicator */
+        .scroll-indicator.hidden {
+            opacity: 0;
+            pointer-events: none;
         }
 
         @keyframes bounce {
@@ -232,16 +244,17 @@
             }
         }
 
-        .scroll-indicator span {
+        .scroll-indicator .mouse-icon { /* แก้ไขเล็กน้อย */
             display: block;
             width: 20px;
             height: 30px;
             border: 2px solid #00fff9;
             border-radius: 15px;
             position: relative;
+            margin: 0 auto; /* เพิ่มเข้ามา */
         }
 
-        .scroll-indicator span::before {
+        .scroll-indicator .mouse-icon::before { /* แก้ไขเล็กน้อย */
             content: '';
             position: absolute;
             top: 6px;
@@ -253,6 +266,17 @@
             transform: translateX(-50%);
             animation: scroll 1.5s infinite;
         }
+        
+        /* เพิ่มเข้ามา: สไตล์สำหรับข้อความ "scroll" */
+        .scroll-indicator .scroll-text {
+            display: block;
+            margin-top: 10px;
+            color: #00fff9;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
 
         @keyframes scroll {
             0% {
@@ -294,7 +318,7 @@
         .social-links {
             position: fixed;
             right: 40px;
-            top: 50%;
+            top: 30%;
             transform: translateY(-50%);
             z-index: 1000;
             display: flex;
@@ -314,15 +338,16 @@
             transform: scale(1.2);
             text-shadow: 0 0 15px rgba(0, 255, 249, 0.8);
         }
-
+        
+        /* ส่วนนี้ไม่ได้อยู่ในโค้ดเดิม แต่มี CSS รองรับ ผมจึงเพิ่มให้ครับ */
         /* Sound Control */
         .sound-control {
             position: fixed;
             bottom: 40px;
             right: 40px;
             z-index: 1000;
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             background: rgba(0, 255, 249, 0.1);
             border: 2px solid #00fff9;
             border-radius: 50%;
@@ -341,77 +366,22 @@
         }
 
         .sound-control svg {
-            width: 28px;
-            height: 28px;
+            width: 24px;
+            height: 24px;
             fill: #00fff9;
             transition: all 0.3s;
         }
-
-        .sound-control.muted svg {
-            opacity: 0.5;
+        
+        .sound-control #icon-muted, 
+        .sound-control.muted #icon-unmuted {
+            display: none;
+        }
+        
+        .sound-control.muted #icon-muted,
+        .sound-control #icon-unmuted {
+            display: block;
         }
 
-        /* Welcome Overlay */
-        .welcome-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 1;
-            transition: opacity 0.5s;
-        }
-
-        .welcome-overlay.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .welcome-content {
-            text-align: center;
-            padding: 20px;
-        }
-
-        .welcome-content h2 {
-            font-size: 36px;
-            color: #00fff9;
-            margin-bottom: 20px;
-            letter-spacing: 3px;
-        }
-
-        .welcome-content p {
-            font-size: 18px;
-            color: #ccc;
-            margin-bottom: 40px;
-        }
-
-        .enter-button {
-            display: inline-block;
-            padding: 18px 60px;
-            background: rgba(0, 255, 249, 0.1);
-            border: 2px solid #00fff9;
-            color: #00fff9;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: bold;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            transition: all 0.3s;
-            cursor: pointer;
-            backdrop-filter: blur(10px);
-        }
-
-        .enter-button:hover {
-            background: #00fff9;
-            color: #000;
-            box-shadow: 0 0 30px rgba(0, 255, 249, 0.6);
-            transform: translateY(-2px);
-        }
 
         /* Mobile Responsive */
         @media (max-width: 968px) {
@@ -473,7 +443,7 @@
             }
 
             .social-links a {
-                font-size: 18px;
+                font-size: 20px;
             }
 
             .content-section {
@@ -505,18 +475,16 @@
     </style>
 </head>
 <body>
-    <!-- Video Background -->
     <div class="video-container">
-        <iframe 
-            src="https://www.youtube.com/embed/SXg4y2xuxos?autoplay=1&mute=1&loop=1&playlist=SXg4y2xuxos&controls=0&showinfo=0&rel=0&modestbranding=1"
+        <iframe id="bg-video"
+            src="https://www.youtube.com/embed/SXg4y2xuxos?autoplay=1&mute=1&loop=1&playlist=SXg4y2xuxos&controls=0&showinfo=0&rel=0&modestbranding=1&enablejsapi=1"
             frameborder="0" 
             allow="autoplay; encrypted-media">
         </iframe>
     </div>
 
-    <!-- Header -->
     <header>
-        <div class="logo">UNDSCVRD</div>
+        <div class="logo">9PUNE</div>
         <div class="menu-toggle" onclick="toggleMenu()">
             <span></span>
             <span></span>
@@ -525,41 +493,73 @@
         <nav id="mainNav">
             <a href="#home">HOME</a>
             <a href="#about">ABOUT</a>
-            <a href="#tickets">TICKETS</a>
-            <a href="#store">STORE</a>
-            <a href="#stories">STORIES</a>
+            <a href="#gallery">GALLERY</a>
+            <a href="#service">SERVICE</a>
+            <a href="#contact">CONTACT</a>
         </nav>
     </header>
 
-    <!-- Social Links -->
     <div class="social-links">
-        <a href="#" title="Facebook">f</a>
-        <a href="#" title="Instagram">📷</a>
-        <a href="#" title="YouTube">▶</a>
-        <a href="#" title="Email">✉</a>
+        <a href="https://www.facebook.com/profile.php?id=100035441094317" target="_blank"><i class='bx bxl-facebook'></i></a>
+        <a href="#"> <i class='bx bxl-instagram'></i></a>
+        <a href="#"><i class='bx bxl-youtube'></i></a>
+        <a href="#"><i class='bx  bx-envelope'></i> </a>
     </div>
 
-    <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-content">
-            <h1 class="hero-title">SAN FRANCISCO'S<br>FILIPINO AMERICAN<br>BLOCK PARTY</h1>
-            <p class="hero-subtitle">IS BACK!</p>
-            <p class="hero-date">SATURDAY, OCTOBER 18, 2025 | 12PM - 6PM<br>MINT PLAZA & JESSIE WEST</p>
-            <a href="#rsvp" class="cta-button">RSVP NOW</a>
+            <h1 class="hero-title"> <br>Pune Chawakorn<br>Official Website</h1>
+            <p class="hero-subtitle">The best of 2025</p>
+            <p class="hero-date"> Most Precious Things<br>お願い します.</p>
+            <a href="#about" class="cta-button">LET'S GO!</a>
         </div>
         <div class="scroll-indicator">
-            <span></span>
+            <span class="mouse-icon"></span>
+            <span class="scroll-text">scroll</span>
+        </div>
+    </section>
+    
+    <div class="sound-control muted" id="sound-control">
+        <svg id="icon-unmuted" viewBox="0 0 24 24"><path d="M14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77zM16.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM3 9v6h4l5 5V4L7 9H3z"></path></svg>
+        <svg id="icon-muted" viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"></path></svg>
+    </div>
+
+
+    <!-- About -->
+    <section class="content-section" id="about">
+        <h2 class="section-title">ABOUT ME</h2>
+        <div class="section-content">
+            <p style="text-align: center; margin-bottom: 30px;">
+                
+            <p>
+                IT guy who love Anime with Multimedia Skills 
+                I am a tech support enthusiast with a passion for graphic design and game development.<br> 
+                My journey in the world of IT support has fueled my curiosity and problem-solving skills.<br>  
+                Outside of resolving technical issues, I find joy in creating visually appealing graphics and diving into the exciting realm of game development.<br>  
+               
+            </p>
+            <br>
+            </p>
+            <p style="text-align: center;">
+                Constantly exploring the intersection of technology and creativity, I strive to blend my technical expertise with a love for artistic expression.
+            </p>
         </div>
     </section>
 
-    <!-- Content Section -->
-    <section class="content-section" id="about">
-        <h2 class="section-title">ABOUT THE EVENT</h2>
+
+    
+    <!-- Gellery -->
+    <section class="content-section" id="gallery">
+        <h2 class="section-title">GALLERY</h2>
         <div class="section-content">
             <p style="text-align: center; margin-bottom: 30px;">
-                Join us for an unforgettable celebration of Filipino American culture, music, food, and community. 
-                Experience the vibrant energy of San Francisco's most exciting block party featuring live performances, 
-                local artists, authentic cuisine, and more.
+            <h2> IT guy who love Anime with Multimedia Skills </h2>
+            <p>I am a tech support enthusiast with a passion for graphic design and game development.<br> 
+                My journey in the world of IT support has fueled my curiosity and problem-solving skills.<br>  
+                Outside of resolving technical issues, I find joy in creating visually appealing graphics and diving into the exciting realm of game development.<br>  
+                Constantly exploring the intersection of technology and creativity, I strive to blend my technical expertise with a love for artistic expression.
+            </p>
+            <br>
             </p>
             <p style="text-align: center;">
                 This is more than just a party - it's a cultural movement bringing together communities, 
@@ -568,20 +568,26 @@
         </div>
     </section>
 
+
+
+
+
+
+
+
     <script>
+        // --- ส่วนที่ 1: ควบคุมเมนูมือถือ และ Smooth Scroll (โค้ดเดิมของคุณ) ---
         function toggleMenu() {
             const nav = document.getElementById('mainNav');
             nav.classList.toggle('active');
         }
 
-        // Close menu when clicking on a link
         document.querySelectorAll('nav a').forEach(link => {
             link.addEventListener('click', () => {
                 document.getElementById('mainNav').classList.remove('active');
             });
         });
 
-        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -594,6 +600,45 @@
                 }
             });
         });
+
+        // --- ส่วนที่ 2: ทำให้ Scroll Indicator หายไป (เพิ่มใหม่) ---
+        const scrollIndicator = document.querySelector('.scroll-indicator');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) { // เมื่อ scroll ลงมาเกิน 50px
+                scrollIndicator.classList.add('hidden');
+            } else {
+                scrollIndicator.classList.remove('hidden');
+            }
+        });
+        
+        // --- ส่วนที่ 3: ควบคุมเสียงวิดีโอ (เพิ่มใหม่) ---
+        var player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('bg-video', {
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
+        
+        function onPlayerReady(event) {
+            // วิดีโอจะเริ่มเล่นแบบปิดเสียงตามค่าใน URL (mute=1)
+            event.target.playVideo();
+        }
+
+        const soundControl = document.getElementById('sound-control');
+        soundControl.addEventListener('click', () => {
+            if (player.isMuted()) {
+                player.unMute();
+                soundControl.classList.remove('muted');
+            } else {
+                player.mute();
+                soundControl.classList.add('muted');
+            }
+        });
+
     </script>
+    <script src="https://www.youtube.com/iframe_api"></script>
 </body>
 </html>
